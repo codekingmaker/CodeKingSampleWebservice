@@ -46,6 +46,7 @@ namespace SampleWebService
             Context.Response.End();
         }
 
+        #region Login Validation
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void Login(string emailAddress, string password)
@@ -72,6 +73,33 @@ namespace SampleWebService
             Context.Response.Clear();
             Context.Response.End();
         }
+        #endregion
 
+        #region Product Like/Unlike
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void LikeProduct(string userCode, string productId, bool isLiked)
+        {
+            System.Web.Script.Serialization.JavaScriptSerializer oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            BLProduct objProduct = new BLProduct();
+            objProduct.sProductCode = productId;
+            objProduct = objProduct.LikeProduct(userCode, isLiked);
+            
+            Hashtable objResult = new Hashtable();
+            objResult.Add("ResultValue", objProduct.IResultNo);
+            objResult.Add("Result", objProduct.SResult);
+            if (objProduct.IResultNo == 1)
+            {
+                objResult.Add("LikeCount", objProduct.iProductLikeCount);
+                objResult.Add("ProductCode", objProduct.sProductCode);
+                objResult.Add("UserCode", userCode);
+            }
+
+            Context.Response.Write(oSerializer.Serialize(objResult));
+            Context.Response.Flush();
+            Context.Response.Clear();
+            Context.Response.End();
+        }
+        #endregion
     }
 }

@@ -40,7 +40,7 @@
   <ItemGroup>
     <Reference Include="DataLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DataLayer.dll</HintPath>
+      <HintPath>..\..\SampleWebService\SampleWebService\bin\DataLayer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer\BLCommon.cs" />
+    <Compile Include="BusinessLayer\BLProduct.cs" />
     <Compile Include="BusinessLayer\BLUser.cs" />
     <Compile Include="WebService.asmx.cs">
       <DependentUpon>WebService.asmx</DependentUpon>
